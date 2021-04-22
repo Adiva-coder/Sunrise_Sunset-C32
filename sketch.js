@@ -9,7 +9,7 @@ var engine, world;
 var backgroundImg;
 var hour, time;
 var bg = "sunrise1.png";
-var date, month, year;
+//var date, month, year;
 
 
 function preload() {
@@ -62,9 +62,9 @@ function draw(){
     }
    
     //displaying the date in dd/mm/yyyy format
-    text("Date: " + date, 600, 50);
+    /*text("Date: " + date, 600, 50);
     text("- "+month, 720, 50);
-    text("- "+year, 780, 50);
+    text("- "+year, 780, 50);*/
 
 }
 
@@ -82,9 +82,9 @@ async function getBackgroundImg(){
     hour = datetime.slice(11, 13);
     time = datetime.slice(11, 16);
 
-    date = datetime.slice(8, 10);
+    /*date = datetime.slice(8, 10);
     month = datetime.slice(5, 7);
-    year = datetime.slice(0, 4);
+    year = datetime.slice(0, 4);*/
 
     //adding conditions to change the background images from sunrise to sunset
     if(hour>=04 && hour<=07){
