@@ -7,9 +7,10 @@ const Constraint = Matter.Constraint;
 //declaring variables
 var engine, world;
 var backgroundImg;
+var date, month, year;
 var hour, time;
 var bg = "sunrise1.png";
-var date, month, year;
+
 
 
 function preload() {
@@ -44,6 +45,11 @@ function draw(){
     fill("red");
     text("Time: " + time, 50, 50);
     
+    //displaying the date in dd/mm/yyyy format
+    text("Date: " + date, 600, 50);
+    text("- "+month, 720, 50);
+    text("- "+year, 780, 50);
+   
     //displaying good morning, afternoon, evening and night
     if(hour>=01 && hour<=11){
         text("Good Morning !! :)", 50, 80);
@@ -60,12 +66,7 @@ function draw(){
     if(hour>=20 && hour<=00){
         text("Good Night !! :)", 50, 80);
     }
-   
-    //displaying the date in dd/mm/yyyy format
-    text("Date: " + date, 600, 50);
-    text("- "+month, 720, 50);
-    text("- "+year, 780, 50);
-
+  
 }
 
 
@@ -79,12 +80,13 @@ async function getBackgroundImg(){
 
     //taking the datetime from the data and slicing the hour, time, date, month, year from it
     var datetime = responseJSON.datetime;
-    hour = datetime.slice(11, 13);
-    time = datetime.slice(11, 16);
-
-    date = datetime.slice(8, 10);
+   
+     date = datetime.slice(8, 10);
     month = datetime.slice(5, 7);
     year = datetime.slice(0, 4);
+   
+    hour = datetime.slice(11, 13);
+    time = datetime.slice(11, 16);
 
     //adding conditions to change the background images from sunrise to sunset
     if(hour>=04 && hour<=07){
