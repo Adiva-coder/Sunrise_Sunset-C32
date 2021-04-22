@@ -72,7 +72,7 @@ function draw(){
 //async and await allows javascript to wait and fetch the link
 async function getBackgroundImg(){
     //writing code to fetch time from the given API
-    var response = await fetch("http://worldtimeapi.org/api/timezone/Asia/Kolkata");
+    var response = await fetch("https://worldtimeapi.org/api/timezone/Asia/Kolkata");
 
     //changing the retrieved data to JSON format
     var responseJSON = await response.json();
