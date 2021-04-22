@@ -7,8 +7,9 @@ const Constraint = Matter.Constraint;
 //declaring variables
 var engine, world;
 var backgroundImg;
-var hour;
+var hour, time;
 var bg = "sunrise1.png";
+var date, month, year;
 
 
 function preload() {
@@ -38,26 +39,52 @@ function draw(){
     background(backgroundImg);
 
     //displaying the rounded-off time
-    stroke(10);
+    stroke(5);
     textSize(30);
     fill("red");
-    text("Time: " + hour, 50, 50);
-    text(" ' th hour", 160, 50)
+    text("Time: " + time, 50, 50);
+    
+    //displaying good morning, afternoon, evening and night
+    if(hour>=01 && hour<=11){
+        text("Good Morning !! :)", 50, 80);
+    }
+
+    if(hour>=12 && hour<=17){
+        text("Good Afternoon !! :)", 50, 80);
+    }
+
+    if(hour>=18 && hour<=19){
+        text("Good Evening !! :)", 50, 80);
+    }
+
+    if(hour>=20 && hour<=00){
+        text("Good Night !! :)", 50, 80);
+    }
    
+    //displaying the date in dd/mm/yyyy format
+    text("Date: " + date, 600, 50);
+    text("- "+month, 720, 50);
+    text("- "+year, 780, 50);
+
 }
 
 
 //async and await allows javascript to wait and fetch the link
 async function getBackgroundImg(){
     //writing code to fetch time from the given API
-    var response = await fetch("https://worldtimeapi.org/api/timezone/Asia/Kolkata");
+    var response = await fetch("http://worldtimeapi.org/api/timezone/Asia/Kolkata");
 
     //changing the retrieved data to JSON format
     var responseJSON = await response.json();
 
-    //taking the datetime from the data and slicing the hour from it
+    //taking the datetime from the data and slicing the hour, time, date, month, year from it
     var datetime = responseJSON.datetime;
     hour = datetime.slice(11, 13);
+    time = datetime.slice(11, 16);
+
+    date = datetime.slice(8, 10);
+    month = datetime.slice(5, 7);
+    year = datetime.slice(0, 4);
 
     //adding conditions to change the background images from sunrise to sunset
     if(hour>=04 && hour<=07){
@@ -90,7 +117,7 @@ async function getBackgroundImg(){
     }else if(hour==22){
         bg = "sunset10.png";
 
-    }else if(hour==23){
+    }else if(hour==22){
         bg = "sunset11.png";
 
     }else {
@@ -101,9 +128,5 @@ async function getBackgroundImg(){
     //loading the image in backgroundImg variable
     backgroundImg = loadImage(bg);
 
-    //logging the bg img and current hour in the console
-    console.log(bg);
-    console.log(hour);
-    
 }
 
